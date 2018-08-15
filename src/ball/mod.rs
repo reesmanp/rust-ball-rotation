@@ -71,7 +71,7 @@ impl<'a, 'b> State<GameData<'a, 'b>> for Ball {
                         None => prev_pos
                     };
                     let dir_vec = create_directional_vector(pos, prev_pos);
-                    Some(Vector3 { x: dir_vec.z, y: dir_vec.y, z: -1.0 * dir_vec.x })
+                    Some(Vector3 { x: dir_vec.y, y: -1.0 * dir_vec.x, z: dir_vec.z })
                 },
                 None => None
             };
@@ -83,7 +83,7 @@ impl<'a, 'b> State<GameData<'a, 'b>> for Ball {
                         .distance(Quaternion::from_sv(1.0, new_pos.unwrap()));
                     let new_rot = Quaternion::from_axis_angle(
                         rel_axis_normalized,
-                        Deg(distance * 5.0)
+                        Deg(distance * 1.0)
                     );
 
                     world.write_storage::<Transform>().get_mut(self.sphere.unwrap()).unwrap()
